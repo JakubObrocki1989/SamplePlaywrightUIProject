@@ -1,28 +1,160 @@
-import { faker } from '@faker-js/faker/locale/en';
 const genders = new Array("Mr", "Mrs")
 const months = new Array("January", "February", "March", "April", "May", "June", "July", "September", "October", "November", "December");
 const countries = new Array("India", "United States", "Canada", "Australia", "Israel", "New Zealand", "Singapore");
 
 export class RegisterUser {
-    constructor(username, email, gender, password, day, month, year, signUpForNewsletter, receiveSpecialOffers, firstName, lastName, company, address, address2, country, state, city, zipCode, mobile) {
-    this.username = faker.internet.username()
-    this.email = faker.internet.email()
-    this.gender = genders[Math.floor(Math.random() * 1)],
-    this.password = faker.internet.password(),
-    this.day = Math.floor(Math.random() * 30),
-    this.month = months[Math.floor(Math.random() * 11)],
-    this.year = Math.floor(Math.random() * 2024),
-    this.signUpForNewsletter = true,
-    this.receiveSpecialOffers = true,
-    this.firstName = faker.person.firstName(),
-    this.lastName = faker.person.lastName(),
-    this.company = faker.company.name(),
-    this.address = faker.location.streetAddress(),
-    this.address2 = faker.location.buildingNumber(),
-    this.country = countries[Math.floor(Math.random() * 6)],
-    this.state = faker.location.state(),
-    this.city = faker.location.city(),
-    this.zipcode = faker.location.zipCode()
-    this.mobile = faker.location.mobile
+    constructor() {
+    }
+
+    setUsername(text) {
+        this.username = text
+    }
+
+    setEmail(text) {
+        this.email = text
+    }
+
+    setGender(text) {
+        this.gender = text
+    }
+
+    setPassword(text) {
+        this.password = text
+    }
+
+    setDay(text) {
+        this.day = text
+    }
+
+    setMonth(text) {
+        this.month = text
+    }
+
+    setYear(text) {
+        this.year = text
+    }
+
+    setSignUpForNewsletter(text) {
+        this.signUpForNewsletter = text
+    }
+
+    setReceiveSpecialOffers(text) {
+        this.receiveSpecialOffers = text
+    }
+
+    setFirstName(text) {
+        this.firstName = text
+    }
+
+    setLastName(text) {
+        this.lastName = text
+    }
+
+    setCompany(text) {
+        this.company = text
+    }
+
+    setAddress(text) {
+        this.address = text
+    }
+
+    setAddress2(text) {
+        this.address2 = text
+    }
+
+    setCountry(text) {
+        this.country = text
+    }
+
+    setState(text) {
+        this.state = text
+    }
+
+    setCity(text) {
+        this.city = text
+    }
+
+    setZipCode(text) {
+        this.zipCode = text
+    }
+
+    setMobile(text) {
+        this.mobile = text
+    }
+
+    getUsername() {
+        return this.username
+    }
+
+    getEmail() {
+        return this.email
+    }
+
+    getGender() {
+        return this.gender
+    }
+
+    getPassword() {
+        return this.password
+    }
+
+    getDay() {
+        return this.day
+    }
+
+    getMonth() {
+        return this.month
+    }
+
+    getYear() {
+        return this.year 
+    }
+
+    getSignUpForNewsletter() {
+        return this.signUpForNewsletter
+    }
+
+    getReceiveSpecialOffers() {
+        return this.receiveSpecialOffers
+    }
+
+    getFirstName() {
+        return this.firstName
+    }
+
+    getLastName() {
+        return this.lastName
+    }
+
+    getCompany() {
+        return this.company
+    }
+
+    getAddress() {
+        return this.address
+    }
+
+    getAddress2() {
+        return this.address2
+    }
+
+    getCountry() {
+        return this.country
+    }
+
+    getState() {
+        return this.state
+    }
+
+    getCity() {
+        return this.city
+    }
+
+    getZipCode() {
+        return this.zipCode
+    }
+
+    getMobile() {
+        return this.mobile
     }
 }

@@ -8,7 +8,11 @@ export class HomePage {
         this.menuButtons = this.page.locator('ul[class="nav navbar-nav"] li a')
     }
 
-    clickSignupLoginButton = async () => {
-        await this.menuButtons.filter({hasText: 'Signup / Login'}).click()
+    isMenuOptionVisible = async (text) => {
+        await this.menuButtons.filter({hasText: text}).waitFor()
+    }
+
+    clickMenuOption = async (text) => {
+        await this.menuButtons.filter({hasText: text}).click()
     }
 }

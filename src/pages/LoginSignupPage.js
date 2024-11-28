@@ -8,21 +8,29 @@ export class LoginSignupPage {
         this.nameInput = this.page.locator('input[data-qa="signup-name"]')
         this.emailAddressInput = this.page.locator('input[data-qa="signup-email"]')
         this.signupButton = this.page.locator('button[data-qa="signup-button"]')
+        this.signupEmailExistErrorHeader = this.page.locator('div[class="signup-form"] p')
     }
 
     isHeaderVisible = async () => {
         await expect(this.signupHeader).toBeVisible()
     }
 
-    fillSignup = async (RegisterUser) => {
+    fillSignup = async (username, email) => {
         await this.nameInput.waitFor()
-        await this.nameInput.fill(RegisterUser.username)
-        await this.emailAddressInput.fill(RegisterUser.email)
-        return this
+        await this.nameInput.fill(username)
+        await this.emailAddressInput.fill(email)
     }
 
     clickSignup = async () => {
         await this.signupButton.waitFor()
         await this.signupButton.click()
     } 
+
+    isSignupEmailExistErrorHeaderVisible = async () => {
+        await expect(this.signupEmailExistErrorHeader).toBeVisible()
+    }
+
+    checkSignupEmailExistErrorText = async (text) => {
+        await expect(await this.signupEmailExistErrorHeader.first().innerText()).toBe(text)
+    }
 }
