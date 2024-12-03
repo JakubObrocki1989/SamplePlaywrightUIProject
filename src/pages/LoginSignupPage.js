@@ -9,6 +9,10 @@ export class LoginSignupPage {
         this.emailAddressInput = this.page.locator('input[data-qa="signup-email"]')
         this.signupButton = this.page.locator('button[data-qa="signup-button"]')
         this.signupEmailExistErrorHeader = this.page.locator('div[class="signup-form"] p')
+        this.emailOrPasswordIsIncorrectHeader = this.page.locator('div[class="login-form"] p')
+        this.loginEmailInput = this.page.locator('input[data-qa="login-email"]')
+        this.loginPasswordInput = this.page.locator('input[data-qa="login-password"]')
+        this.loginButton = this.page.locator('button[data-qa="login-button"]')
     }
 
     isHeaderVisible = async () => {
@@ -33,4 +37,25 @@ export class LoginSignupPage {
     checkSignupEmailExistErrorText = async (text) => {
         await expect(await this.signupEmailExistErrorHeader.first().innerText()).toBe(text)
     }
+
+    
+    isEmailOrPasswordIsIncorrectHeaderVusubke = async () => {
+        await expect(this.emailOrPasswordIsIncorrectHeader).toBeVisible()
+    }
+
+    checkEmailOrPasswordIsIncorrectHeaderText = async (text) => {
+        await expect(await this.emailOrPasswordIsIncorrectHeader.first().innerText()).toBe(text)
+    }
+
+    fillLogin = async (username, password) => {
+        await this.loginEmailInput.waitFor()
+        await this.loginEmailInput.fill(username)
+        await this.loginPasswordInput.fill(password)
+    }
+
+    clickLogin = async () => {
+        await this.loginButton.waitFor()
+        await this.loginButton.click()
+    }
+
 }

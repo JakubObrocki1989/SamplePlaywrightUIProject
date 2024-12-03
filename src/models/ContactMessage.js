@@ -14,7 +14,7 @@ export class ContactMessage {
     }
 
     setMessage(text) {
-        this.subject = text
+        this.message = text
     }
 
     setfilePath(text) {
