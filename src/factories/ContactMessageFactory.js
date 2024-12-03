@@ -8,10 +8,10 @@ export class ContactMessageFactory {
     }
 
     getContactUsMessage() {
+        contactMessage.setName(faker.person.firstName())
         contactMessage.setEmail(faker.internet.email())
-        contactMessage.setSubject(faker.commerce.productName)
-        contactMessage.setMessage(faker.person.nameWithMiddle)
-        contactMessage.setFilePath('tu bedzie sciezka')
+        contactMessage.setSubject(faker.commerce.productName())
+        contactMessage.setMessage(faker.person.fullName())
         return contactMessage
     }
 }

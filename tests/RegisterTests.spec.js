@@ -37,11 +37,6 @@ test('User should be registered and deleted', async ({ page }) => {
 test('User should not be registered with existing email', async ({ page }) => {
   const homePage = new HomePage(page)
   const loginSignUpPage = new LoginSignupPage(page)
-  const signupPage = new SignupPage(page)
-  const registerUserFactory = new RegisterUserFactory()
-  const accountCreatedPage = new AccountCreatedPage(page)
-  const accountDeletedPage = new AccountDeletedPage(page)
-  const user = registerUserFactory.getRegularRegisterUser()
   await page.goto('/')
   await homePage.isMenuOptionVisible("Signup / Login")
   await homePage.clickMenuOption("Signup / Login")

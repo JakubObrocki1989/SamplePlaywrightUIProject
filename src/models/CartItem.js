@@ -1,4 +1,4 @@
-export class CartItems {
+export class CartItem {
     constructor() {
     }
 
