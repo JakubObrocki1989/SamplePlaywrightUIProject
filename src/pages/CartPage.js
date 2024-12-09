@@ -12,14 +12,34 @@ export class CartPage {
         this.deleteProductButtonList = this.page.locator('a[class="cart_quantity_delete"]')
         }
 
-    cartProductListSizeShouldHasSize = async (size) => {
-        await expect(this.cartPageHeader).toBeVisible()
-        await expect(await this.cartItems.count()).toBe(size)
+    getCartProductListSize = async () => {
+        await this.cartPageHeader.waitFor()
+        return await this.cartItems.count()
     }
 
     getCartItemDetails = async (number) => {
         await cartItem.setName(await this.cartItems.locator('td[class="cart_description"] a').nth(number).innerText())
         await cartItem.setPrice(await this.cartItems.locator('td[class="cart_price"] p').nth(number).innerText())
         return cartItem
+    }
+
+    proceedToCheckOut = async () => {
+        await this.proceedToCheckoutButton.waitFor()
+        await this.proceedToCheckoutButton.click()
+    }
+
+    getProductsCount = async () => {
+        return await this.deleteProductButtonList.count()
+
+    }
+
+    deleteProduct = async () => {
+        await this.deleteProductButtonList.first().waitFor()
+        const listSize = await this.getProductsCount()
+        await this.cartPageHeader.waitFor()
+        await this.deleteProductButtonList.first().click()
+        await expect.poll(async () => {
+            return await this.getProductsCount()
+        }).toBeLessThan(listSize)
     }
 }

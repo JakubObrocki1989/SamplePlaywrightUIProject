@@ -1,35 +1,24 @@
-import { HomePage } from '../src/pages/HomePage.js';
-import { LoginSignupPage } from '../src/pages/LoginSignupPage.js';
-import { SignupPage } from '../src/pages/SignupPage.js';
-import { RegisterUserFactory} from '../src/factories/RegisterUserFactory.js';
-import { AccountCreatedPage } from '../src/pages/AccountCreatedPage.js';
-import { AccountDeletedPage } from '../src/pages/AccountDeletedPage.js';
+const { test, expect } = require('./BaseTests.js');
 
-const { test, expect } = require('@playwright/test');
-
-test('Login with correct credentials', async ({ page }) => {
-    const homePage = new HomePage(page)
-    const loginSignUpPage = new LoginSignupPage(page)
+test('Login with correct credentials', async ({ page, homePage, loginSignUpPage }) => {
     await page.goto('/')
-    await homePage.isMenuOptionVisible("Signup / Login")
+    expect(await homePage.isMenuOptionVisible("Signup / Login")).toBe(true)
     await homePage.clickMenuOption("Signup / Login")
-    await loginSignUpPage.isHeaderVisible()
+    expect(await loginSignUpPage.isHeaderVisible()).toBe(true)
     await loginSignUpPage.fillLogin("automation-ui@sampledomain.com", "pass1723788968")
     await loginSignUpPage.clickLogin()
-    await homePage.isMenuOptionVisible("Logged in as test")
+    expect(await homePage.isMenuOptionVisible("Logged in as test")).toBe(true)
     });
 
-test('Login with incorrect credentials', async ({ page }) => {
-    const homePage = new HomePage(page)
-    const loginSignUpPage = new LoginSignupPage(page)
+test('Login with incorrect credentials', async ({ page, homePage, loginSignUpPage }) => {
     await page.goto('/')
-    await homePage.isMenuOptionVisible("Signup / Login")
+    expect(await homePage.isMenuOptionVisible("Signup / Login")).toBe(true)
     await homePage.clickMenuOption("Signup / Login")
-    await loginSignUpPage.isHeaderVisible()
+    expect(await loginSignUpPage.isHeaderVisible()).toBe(true)
     await loginSignUpPage.fillLogin("wronguser@credentials.com", "password")
     await loginSignUpPage.clickLogin()
-    await loginSignUpPage.isEmailOrPasswordIsIncorrectHeaderVusubke()
-    await loginSignUpPage.checkEmailOrPasswordIsIncorrectHeaderText('Your email or password is incorrect!')
+    await loginSignUpPage.isEmailOrPasswordIsIncorrectHeaderVisible()
+    expect(await loginSignUpPage.getEmailOrPasswordIsIncorrectHeaderText()).toBe("Your email or password is incorrect!")
 });
 
 

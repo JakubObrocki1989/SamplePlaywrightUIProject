@@ -1,6 +1,3 @@
-import { faker } from "@faker-js/faker"
-import { expect } from "@playwright/test"
-
 export class LoginSignupPage {
     constructor(page) {
         this.page = page
@@ -16,7 +13,7 @@ export class LoginSignupPage {
     }
 
     isHeaderVisible = async () => {
-        await expect(this.signupHeader).toBeVisible()
+        return await this.signupHeader.isVisible()
     }
 
     fillSignup = async (username, email) => {
@@ -31,20 +28,21 @@ export class LoginSignupPage {
     } 
 
     isSignupEmailExistErrorHeaderVisible = async () => {
-        await expect(this.signupEmailExistErrorHeader).toBeVisible()
+        await this.signupEmailExistErrorHeader.waitFor()
+        return this.signupEmailExistErrorHeader.isVisible()
     }
 
-    checkSignupEmailExistErrorText = async (text) => {
-        await expect(await this.signupEmailExistErrorHeader.first().innerText()).toBe(text)
+    getSignupEmailExistErrorText = async () => {
+        return await this.signupEmailExistErrorHeader.first().innerText()
     }
 
-    
-    isEmailOrPasswordIsIncorrectHeaderVusubke = async () => {
-        await expect(this.emailOrPasswordIsIncorrectHeader).toBeVisible()
+    isEmailOrPasswordIsIncorrectHeaderVisible = async () => {
+        await this.emailOrPasswordIsIncorrectHeader.waitFor()
+        return this.emailOrPasswordIsIncorrectHeader.isVisible()
     }
 
-    checkEmailOrPasswordIsIncorrectHeaderText = async (text) => {
-        await expect(await this.emailOrPasswordIsIncorrectHeader.first().innerText()).toBe(text)
+    getEmailOrPasswordIsIncorrectHeaderText = async () => {
+        return await this.emailOrPasswordIsIncorrectHeader.first().innerText()
     }
 
     fillLogin = async (username, password) => {
@@ -57,5 +55,4 @@ export class LoginSignupPage {
         await this.loginButton.waitFor()
         await this.loginButton.click()
     }
-
 }

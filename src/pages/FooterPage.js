@@ -1,5 +1,3 @@
-import { expect } from "@playwright/test"
-
 export class FooterPage {
     constructor(page) {
         this.page = page
@@ -9,14 +7,12 @@ export class FooterPage {
         this.successSubscribeMessage = this.page.locator('div[id="success-subscribe"]')
     }
 
-    checkSubscriptionHeaderText = async (text) => {
-        await this.subscriptionHeader.waitFor()
-        await expect(this.subscriptionHeader.first().innerText()).toBe(text)
+    getSubscriptionHeaderText = async () => {
+        return await this.subscriptionHeader.innerText()
     }
 
-    checkSubscriptionMessageText = async (text) => {
-        await await expect(this.successSubscribeMessage).toBeVisible()
-        await expect(this.successSubscribeMessage.first().innerText()).toBe(text)
+    getSubscriptionMessageText = async () => {
+        return await this.successSubscribeMessage.first().innerText()
     }
 
     subscribe = async (text) => {

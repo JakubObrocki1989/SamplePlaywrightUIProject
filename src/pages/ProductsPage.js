@@ -13,13 +13,12 @@ export class ProductsPage {
         this.submitSearchButton = this.page.locator('button[id="submit_search"]')
         this.categoriesList = this.page.locator('div[class="panel-group category-products"] a')
         this.subcategoriesList = this.page.locator('div[class="panel-body"] a')
-        this.brandsList = this.page.locator('div[@class="brands-name"] a')
+        this.brandsList = this.page.locator('div[class="brands-name"] a')
     }
 
     addAllVisibleProducts = async () => {
         await expect(await this.productsList.count()).toBe(2)
         for (let i = 0; i < await this.productsList.count(); i++) {
-            console.log("i = " + i)
             await this.productsList.nth(i).hover()
             await this.productsList.nth(i).locator('div[class="product-overlay"] a').locator('visible=true').waitFor()
             await this.productsList.nth(i).locator('div[class="product-overlay"] a').locator('visible=true').click()
@@ -28,9 +27,9 @@ export class ProductsPage {
           }
     }
 
-    productListSizeShouldHasSize = async (size) => {
-        await expect(this.productsHeader).toBeVisible()
-        await expect(await this.productsList.count()).toBe(size)
+    getProductListSize = async () => {
+        this.productsHeader.waitFor()
+        return await this.productsList.count()
     }
 
     searchItem = async (text) => {
@@ -40,12 +39,12 @@ export class ProductsPage {
     }
 
     viewProduct = async (number) => {
-        await expect(this.productsHeader).toBeVisible()
+        await this.productsHeader.waitFor()
         await this.productsList.nth(number).locator('div[class="choose"] a').click()
     }
 
     addProduct = async (number) => {
-        await expect(await this.productsList.first()).toBeVisible()
+        await this.productsList.first().waitFor()
         await this.productsList.nth(number).hover()
         await this.productsList.nth(number).locator('div[class="product-overlay"] a').locator('visible=true').waitFor()
         await this.productsList.nth(number).locator('div[class="product-overlay"] a').locator('visible=true').click()
@@ -60,6 +59,7 @@ export class ProductsPage {
     }
 
     openCategory = async (text) => {
+        await this.categoriesList.first().waitFor()
         await this.categoriesList.filter({hasText: text}).click()
     }
 
@@ -67,9 +67,13 @@ export class ProductsPage {
         await this.subcategoriesList.filter({hasText: text}).locator('visible=true').click()
     }
 
-    productsHeaderShouldHaveText = async (text) => {
-        await expect(this.productsHeader).toBeVisible()
-        await expect(this.productsHeader.innerText()).toBe(text)
+    getProductsHeaderText = async () => {
+        await this.productsHeader.waitFor()
+        return await this.productsHeader.innerText()
+    }
+
+    openBrand = async (text) => {
+        await this.brandsList.filter({hasText: text}).click()
     }
     
 }
