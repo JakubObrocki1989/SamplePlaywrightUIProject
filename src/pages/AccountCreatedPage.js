@@ -1,5 +1,3 @@
-import { expect } from "@playwright/test"
-
 export class AccountCreatedPage {
     constructor(page) {
         this.page = page
@@ -8,11 +6,12 @@ export class AccountCreatedPage {
     }
 
     isHeaderVisible = async () => {
-        await expect(this.accountCreatedHeader).toBeVisible()
+        await this.accountCreatedHeader.waitFor()
+        return this.accountCreatedHeader.isVisible()
     }
 
-    checkHeaderText = async (text) => {
-        await expect(await this.accountCreatedHeader.innerText()).toBe(text)
+    getHeaderText = async () => {
+        return await this.accountCreatedHeader.innerText()
     }
 
     clickContinueButton = async () => {

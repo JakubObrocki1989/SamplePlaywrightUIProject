@@ -1,5 +1,3 @@
-import { expect } from "@playwright/test"
-
 export class SignupPage {
     constructor(page) {
         this.page = page
@@ -25,15 +23,16 @@ export class SignupPage {
     }
 
     isHeaderVisible = async () => {
-        await expect(this.header.first()).toBeVisible()
+        await this.header.first().waitFor()
+        return await this.header.first().isVisible()
     }
 
-    checkHeaderText = async (text) => {
-        await expect(await this.header.first().innerText()).toBe(text)
+    getHeaderText = async () => {
+        return await this.header.first().innerText()
     }
 
     fillSignupDetails = async (user) => {
-        await expect(this.header.first()).toBeVisible()
+        await this.header.first().waitFor()
         await this.genderRadios.first().check()
         await this.passwordInput.fill(user.getPassword())
         await this.daysSelect.selectOption(user.getDay().toString())

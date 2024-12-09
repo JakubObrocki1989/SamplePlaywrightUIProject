@@ -1,5 +1,3 @@
-import { expect } from "@playwright/test"
-
 export class CartModalPage {
     constructor(page) {
         this.page = page
@@ -15,9 +13,5 @@ export class CartModalPage {
     clickViewCartLink = async () => {
         await this.viewCartLink.waitFor()
         await this.viewCartLink.click()
-    }
-
-    waitForModalToDisappear = async () => {
-        await expect(await this.continueShoppingButton).not.toBeVisible()
     }
 }

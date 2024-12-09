@@ -7,10 +7,10 @@ export class CreditCardDetailsFactory {
 
     getRandomCreditCardDetails() {
         creditCardDetails.setCardOwner(faker.person.firstName());
-        creditCardDetails.setCardNumber(faker.business.creditCardNumber());
-        creditCardDetails.setCvcNumber(faker.number.numberBetween(100, 999).toString());
-        creditCardDetails.setExpiryMonth(faker.number.numberBetween(1, 12).toString());
-        creditCardDetails.setExpiryYear(faker.number.numberBetween(2024, 2030).toString());
+        creditCardDetails.setCardNumber(faker.finance.creditCardNumber());
+        creditCardDetails.setCvcNumber(faker.finance.creditCardCVV());
+        creditCardDetails.setExpiryMonth(Math.floor(Math.random() * (12 - 1 + 1) + 1).toString());
+        creditCardDetails.setExpiryYear(Math.floor(Math.random() * (2050 - 2000 + 1) + 2000).toString());
         return creditCardDetails
     }
 }

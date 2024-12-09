@@ -16,7 +16,7 @@ export class RegisterUserFactory {
         registerUser.setEmail(faker.internet.email())
         registerUser.setGender(genders[Math.floor(Math.random() * 1)])
         registerUser.setPassword(faker.internet.password())
-        registerUser.setDay(Math.floor(Math.random() * 30))
+        registerUser.setDay(Math.floor(Math.random() * (30 - 1 + 1) + 1))
         registerUser.setMonth(months[Math.floor(Math.random() * 11)])
         registerUser.setYear(Math.floor(Math.random() * (2024 - 1900 + 1) + 1900))
         registerUser.setSignUpForNewsletter(true)

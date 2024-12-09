@@ -1,5 +1,3 @@
-import { expect } from "@playwright/test"
-
 export class ContactUsPage {
     constructor(page) {
         this.page = page
@@ -14,11 +12,11 @@ export class ContactUsPage {
     }
 
     isHeaderVisible = async () => {
-        await expect(this.getInTouchHeader).toBeVisible()
+        return await this.getInTouchHeader.isVisible()
     }
 
-    checkGetInTouchHeader = async (text) => {
-        await expect(await this.getInTouchHeader.innerText()).toBe(text)
+    getGetInTouchHeader = async () => {
+        return await this.getInTouchHeader.innerText()
     }
 
     fillData = async (data) => {
@@ -32,14 +30,14 @@ export class ContactUsPage {
         await this.uploadFileInput.setInputFiles(absolutePath);
     }
 
-    
-
     clickSubmit = async () => {
+        this.page.on('dialog', dialog => dialog.accept());
         await this.submitButton.waitFor()
         await this.submitButton.click()
     }
 
-    checkSuccessMessage = async (text) => {
-        await expect(await this.successMessage.innerText()).toBe(text)
+    getSuccessMessage = async () => {
+        await this.successMessage.waitFor()
+        return await this.successMessage.innerText()
     }
 }

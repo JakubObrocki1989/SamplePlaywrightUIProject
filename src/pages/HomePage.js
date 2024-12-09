@@ -1,4 +1,3 @@
-import { expect } from "@playwright/test"
 import { ProductDetails } from "../models/ProductDetails.js"
 
 let productDetails = new ProductDetails()
@@ -17,6 +16,7 @@ export class HomePage {
 
     isMenuOptionVisible = async (text) => {
         await this.menuButtons.filter({hasText: text}).waitFor()
+        return await this.menuButtons.filter({hasText: text}).isVisible();
     }
 
     clickMenuOption = async (text) => {
@@ -32,6 +32,4 @@ export class HomePage {
     addRecommendedProduct = async () => {
         await this.recommendedItems.locator('a').first().click()
     }
-
-    
 }

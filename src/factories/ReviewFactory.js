@@ -6,9 +6,9 @@ export class ReviewFactory {
     constructor() {}
 
     getRandomReview() {
-        review.setName(faker.person.username());
-        review.setEmail(faker.internet.emailAddress());
-        review.setReview(faker.letterify("test"));
+        review.setName(faker.internet.username());
+        review.setEmail(faker.internet.email());
+        review.setReview(faker.lorem.paragraph());
         return review
     }
 }

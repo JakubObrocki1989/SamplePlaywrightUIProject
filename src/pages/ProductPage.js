@@ -1,5 +1,3 @@
-import { expect } from "@playwright/test"
-
 export class ProductPage {
     constructor(page) {
         this.page = page
@@ -12,40 +10,40 @@ export class ProductPage {
         this.productBrand = this.page.locator('div[class="product-information"] p')
         this.quantityInput = this.page.locator('input[id="quantity"]')
         this.addToCartButton = this.page.locator('button[class="btn btn-default cart"]')
-        this.nameInput = this.page.locator('id name')
-        this.emailInput = this.page.locator('id email')
-        this.reviewTextarea = this.page.locator('id review')
-        this.submitButton = this.page.locator('id button-review')
-        this.successAlert = this.page.locator('div[class="alert-success alert"]')
+        this.nameInput = this.page.locator('input[id="name"]')
+        this.emailInput = this.page.locator('input[id="email"]')
+        this.reviewTextarea = this.page.locator('textarea[id="review"]')
+        this.submitButton = this.page.locator('button[id="button-review"]')
+        this.successAlert = this.page.locator('div[id="review-section"] div[class="alert-success alert"]')
     }
 
     getProductName = async () => {
-        await expect(this.productName).toBeVisible()
+        await this.productName.waitFor()
         return await this.page.productName.innerText()
     }
     
     getProductCategory = async () => {
-        await expect(this.productCategory).toBeVisible()
+        await this.productCategory.first().waitFor()
         return await this.page.productCategory.innerText()
     }
     
     getProductPrice = async () => {
-        await expect(this.productPrice).toBeVisible()
+        await this.productPrice.waitFor()
         return await this.page.productPrice.innerText()
     }
     
     getProductAvailability = async () => {
-        await expect(this.productAvailability).toBeVisible()
+        await this.productAvailability.waitFor()
         return await this.page.productAvailability.nth(1).innerText()
     }
 
     getProductCondition = async () => {
-        await expect(this.productCondition).toBeVisible()
+        await this.productCondition.waitFor()
         return await this.page.productCondition.nth(2).innerText()
     }
     
     getProductBrand = async () => {
-        await expect(this.productBrand).toBeVisible()
+        await this.productBrand.waitFor()
         return await this.page.productBrand.nth(3).innerText()
     }
 
@@ -55,5 +53,18 @@ export class ProductPage {
 
     addToCart = async () => {
         await this.addToCartButton.click()
+    }
+
+    writeAReview = async (review) => {
+        await this.nameInput.waitFor()
+        await this.nameInput.fill(review.getName())
+        await this.emailInput.fill(review.getEmail())
+        await this.reviewTextarea.fill(review.getReview())
+        await this.submitButton.click()
+    }
+
+    getReviewSentSuccessMessage = async () => {
+        await this.successAlert.waitFor()
+        return await this.successAlert.innerText()
     }
 }
